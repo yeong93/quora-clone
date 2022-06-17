@@ -5,7 +5,6 @@ import Quora from './Quora';
 function App() {
   return (
     <div className="App">
-      <h1>hi i'm sookyeong</h1>
       <Quora/>
     </div>
   );

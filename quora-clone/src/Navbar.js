@@ -1,4 +1,5 @@
-import { AssignmentTurnedInOutlined, BorderAllRounded, Home, NotificationsOutlined, PeopleAltOutlined } from '@material-ui/icons';
+import { Avatar, Button } from '@material-ui/core';
+import { AssignmentTurnedInOutlined, BorderAllRounded, Home, Language, NotificationsOutlined, PeopleAltOutlined, Search } from '@material-ui/icons';
 import React from 'react';
 import './Navbar.css';
 
@@ -7,8 +8,9 @@ function Navbar() {
     <div className="navbar">
 
         <div className='qHeader_logo'>
-            {/* <img src="" alt="" /> */}
-
+          <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Quora_logo_2015.svg/2880px-Quora_logo_2015.svg.png"
+              alt=""/>
         </div>
 
         <div className='qHeader_icons'>
@@ -32,10 +34,18 @@ function Navbar() {
 
         <div className='qHeader_input'>
             <input type="text" placeholder="검색하기" />
-            <input>search대신</input>
+            <Search/>
+        </div>
+
+        <div className='qHeader_Rem'>
+          <div className='qHeader_avatar'>
+              <Avatar/>
+          </div>
+          <Language/>
+          <Button>질문하기</Button>
         </div>
     </div>
-  );
+  )
 }
 
 export default Navbar;

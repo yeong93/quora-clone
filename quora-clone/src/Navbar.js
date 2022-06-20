@@ -27,8 +27,6 @@ function Navbar() {
 
     setInput("");
     setInputUrl("");
-
-
 }
 
 

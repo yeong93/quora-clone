@@ -1,11 +1,19 @@
 import React, {useState} from 'react';
 import './Login.css'
 import {ArrowForwardIos} from "@material-ui/icons";
-import {auth} from './firebase';
+import {auth, provider} from './firebase';
 
 function Login() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+
+  const signIn = () => {
+    auth.signInWithPopup(provider).catch((e) => alert(e.message));
+
+    console.log(auth);
+
+    
+  }
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -50,7 +58,7 @@ function Login() {
                         <img className="login_gooogleAuth"
                              src="https://media-public.canva.com/MADnBiAubGA/3/screen.svg"
                              alt=""/>
-                        <p> 구글 아이디로 로그인 </p>
+                        <p onClick={signIn}> 구글 아이디로 로그인 </p>
                     </div>
                     <div className="login_authOption">
                         <img className="login_gooogleAuth"

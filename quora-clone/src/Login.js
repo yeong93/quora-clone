@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import './Login.css'
 import {ArrowForwardIos} from "@material-ui/icons";
 import {auth, provider} from './firebase';
@@ -6,17 +6,26 @@ import {auth, provider} from './firebase';
 function Login() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const targets = useRef([]);
 
   const signIn = () => {
     auth.signInWithPopup(provider).catch((e) => alert(e.message));
 
-    console.log(auth);
-
-    
+    console.log(auth);    
   }
 
   const handleLogin = (e) => {
     e.preventDefault();
+
+    if(!email){
+      alert("Please enter your e-mail");
+      targets.current['email'].focus()
+      return;
+    }else if(!password){
+      alert("Please enter your password");
+      targets.current['pw'].focus()
+      return;
+    }
 
     auth.signInWithEmailAndPassword(email, password).then(
       (auth) => {
@@ -39,6 +48,15 @@ function Login() {
     setEmail("");
     setPassword("");
   }
+
+  const onKeyDown = (e) => {
+    alert(e.key);
+    if(e.key === 'Enter') {
+     alert("성공");
+    }
+  }
+
+  const handleKeyPress = e => { if(e.key === 'Enter') { handleLogin(e); } }
 
   return (
     <div className="App">
@@ -94,13 +112,23 @@ function Login() {
 
                           <div className="login_inputFields">
                               <div className="login_inputField">
-                                  <input type="text" placeholder="이메일"
-                                  value={email} onChange={(e) =>setEmail(e.target.value)} />
+                                  <input type="text" 
+                                  placeholder="이메일"
+                                  value={email} 
+                                  onChange={(e) =>setEmail(e.target.value)} 
+                                  onKeyDown={handleKeyPress}
+                                  ref={(el) => targets.current['email'] = el}
+                                  />
                               </div>
 
                               <div className="login_inputField">
-                                  <input type="password" placeholder="비밀번호" 
-                                    value={password} onChange={(e) => setPassword(e.target.value)}/>
+                                  <input type="password" 
+                                    placeholder="비밀번호" 
+                                    value={password} 
+                                    onChange={(e) => setPassword(e.target.value)} 
+                                    onKeyDown={handleKeyPress}
+                                    ref={(el) => targets.current['pw'] = el}
+                                  />
                               </div>
                           </div>
 

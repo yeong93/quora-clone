@@ -18,18 +18,18 @@ import './Navbar.css';
 import Modal from 'react-modal';
 import firebase from "firebase/compat/app"
 
-
+// ctrl + shift + l => 전체 바꾸기
 function Navbar() {
   const user = useSelector(selectUser);
-  const [openModal, setOpenModal] = useState(false);
+  const [qstnOpenModal, setQstnOpenModal] = useState(false);
   const [input,setInput] = useState("");
   const [inputUrl, setInputUrl] = useState("");
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   
   const handleQuestion = (e) => {
     e.preventDefault();
     
-    setOpenModal(false)
+    setQstnOpenModal(false)
     db.collection("questions").add({
       question: input,
       imageUrl: inputUrl,
@@ -58,7 +58,7 @@ function Navbar() {
         </div>
 
         <div className='qHeader_icons'>
-            <RouterLink to="/login">
+            <RouterLink to="/">
               <div className='qHeader_icon'>
                 <Home />
               </div>
@@ -110,9 +110,9 @@ function Navbar() {
           {/* modal end */}
 
           <Language/>
-          <Button onClick={() => setOpenModal(true)}>질문하기</Button>
+          <Button onClick={() => setQstnOpenModal(true)}>질문하기</Button>
 
-          <Modal isOpen={openModal} onRequestClose={() => setOpenModal(false)}
+          <Modal isOpen={qstnOpenModal} onRequestClose={() => setQstnOpenModal(false)}
                        shouldCloseOnOverlayClick={false}
                        style={{
                            overlay: {
@@ -157,7 +157,7 @@ function Navbar() {
                     <div className="modal_buttons">
                         <button type="text" className="add" onClick={handleQuestion}> 질문하기</button>
 
-                        <button onClick={() => setOpenModal(false)}  className="can" >닫기</button>
+                        <button onClick={() => setQstnOpenModal(false)}  className="can" >닫기</button>
                     </div>
 
                 </Modal>

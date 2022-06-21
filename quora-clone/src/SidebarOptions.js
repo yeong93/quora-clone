@@ -1,16 +1,21 @@
 import { Add } from '@material-ui/icons';
 import React from 'react';
 import './SidebarOptions.css';
+import { useSelector } from 'react-redux';
+import { selectUser } from './features/userSlice';
+import { Avatar } from '@material-ui/core';
 
 function SidebarOptions() {
+    const user = useSelector(selectUser);
+
     return(
         <div className="sidebarOptions">
 
-            <div className="sidebarOption">
-                <img
-                    src="https://image.fmkorea.com/files/attach/new/20190510/486616/1724850079/1802639906/540829e025fbdf2152ea49f6e3b84be1.jpeg"
-                    alt=""/>
-                <p> 정장 입은 내 모습</p>
+            <div className="sidebarOption sidebarFirst">
+                <div className='sidebarUserInfo'>
+                    <p><Avatar src={user.photo}/></p>
+                    <p>{user.displayName ? user.displayName : user.email}</p>
+                </div>
             </div>
 
             <div className="sidebarOption">

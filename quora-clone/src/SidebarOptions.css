@@ -27,6 +27,23 @@
 
 .sidebarOption > .MuiSvgIcon-root {
     color:yellowgreen;
-    font-size:medium;
-    margin-left: 10px;
+    font-size:large;
+    /* margin-left: 10px; */
+    margin: 0 19px;
+}
+
+.sidebarUserInfo { 
+    display: flex;
+    align-items: center;
+}
+
+.sidebar > div > div:nth-child(1) > div > p:nth-child(2){
+    margin-left: 14px;
+    font-size: large;
+    font-weight: bold;
+}
+.sidebarFirst{
+    /* border-bottom: 1px solid lightgray; */
+    border: 1px solid lightgray;
+    margin: 8px;
 }

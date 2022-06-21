@@ -169,9 +169,11 @@
 .modal_buttons {
     display: flex;
     align-items: center;
-    margin-top: 260px;
+    /* margin-top: 260px; */
+    margin-top: 200px;
     margin-right: -20px;
-    border-top: 1px solid lightgray;
+    /* border-top: 1px solid lightgray; */
+    margin-right: 0.5%;
 }
 
 .modal_buttons > .can {

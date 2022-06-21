@@ -8,13 +8,15 @@ import Widget from './Widget';
 
 function Quora() {
   return (
-    <div className="quora">
-        <Navbar />
-        <div className='quora_content'>
-          <Sidebar/>
-          <Feed/>
-          <Widget/>
-        </div>
+    <div className="App">
+      <div className="quora">
+          <Navbar />
+          <div className='quora_content'>
+            <Sidebar/>
+            <Feed/>
+            <Widget/>
+          </div>
+      </div>
     </div>
   );
 }

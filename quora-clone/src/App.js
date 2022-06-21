@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Route, Routes} from 'react-router-dom';
 import './App.css';
 import Quora from './Quora';
 import Login from './Login';
@@ -28,13 +29,13 @@ function App() {
     })
   },[dispatch])
 
+
   return (
-    <div className="App">
-      {
-        user ? <Quora/> : <Login/>
-      }
-      
-    </div>
+    // 리액트 v6부터 component 대신 element라고 명명
+    <Routes>
+      <Route exact path="/" element={user ? <Quora/> : <Login/>}/>
+      <Route exact path="/login" element={<Login/>}/>
+    </Routes>
   );
 }
 

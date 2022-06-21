@@ -19,27 +19,26 @@ function Post({key, Id, image, question, timestamp, quoraUser}) {
     const user = useSelector(selectUser);
     const questionId = useSelector(selectQuestionId);
     const questionName = useSelector(selectQuestionName);
-const [getAnswer, setGetAnswer] = useState([]);
+    const [getAnswer, setGetAnswer] = useState([]);
 
 
     const handleAnswer = (e) => {
         e.preventDefault();
 
-        if (questionId){
-            db.collection('questions').doc(questionId).collection('answer').add({
-                questionId: questionId,
+        if(questionId){
+            db.collection("questions").doc(questionId).collection("answer")
+            .add({
+                question: questionId,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                    answer: answer,
-                    user: user,
-                })
-
+                answer: answer,
+                user: user
+            })
 
             console.log(questionId, questionName)
-            setAnswer("")
-            setOpenModal(false)
+            setAnswer("");
+            setOpenModal(false);
         }
     }
-
 
     useEffect(() => {
         if (questionId) {
@@ -51,7 +50,6 @@ const [getAnswer, setGetAnswer] = useState([]);
                     )))
         }
     },[questionId])
-
 
     return(
         <div className="post"
@@ -134,7 +132,7 @@ const [getAnswer, setGetAnswer] = useState([]);
                     }
                 </div>
 
-                <img src={image} alt="" />
+                <img src={image} alt="" style={{width: "200px"}}/>
                 
             </div>
 

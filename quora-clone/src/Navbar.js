@@ -1,6 +1,16 @@
-import { Avatar, Button, Input } from '@material-ui/core';
-import { AssignmentTurnedInOutlined, BorderAllRounded, ExpandMore, Home, Language, Link, NotificationsOutlined, PeopleAltOutlined, Search } from '@material-ui/icons';
+import { Avatar, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Input } from '@material-ui/core';
+import { 
+  AssignmentTurnedInOutlined, 
+  BorderAllRounded, 
+  ExpandMore, 
+  Home, 
+  Language, 
+  Link, 
+  NotificationsOutlined, 
+  PeopleAltOutlined, 
+  Search } from '@material-ui/icons';
 import React, { useState } from 'react';
+import { Link as RouterLink  } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectUser } from './features/userSlice';
 import db, { auth } from './firebase';
@@ -14,22 +24,30 @@ function Navbar() {
   const [openModal, setOpenModal] = useState(false);
   const [input,setInput] = useState("");
   const [inputUrl, setInputUrl] = useState("");
-
+  const [open, setOpen] = React.useState(true);
+  
   const handleQuestion = (e) => {
     e.preventDefault();
+    
     setOpenModal(false)
     db.collection("questions").add({
-        question: input,
-        imageUrl: inputUrl,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        user: user,
+      question: input,
+      imageUrl: inputUrl,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      user: user,
     });
-
+    
     setInput("");
     setInputUrl("");
-}
+  }
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
-
+  const handleClose = () => {
+    setOpen(false);
+  };
+  
   return (
     <div className="navbar">
 
@@ -40,9 +58,12 @@ function Navbar() {
         </div>
 
         <div className='qHeader_icons'>
-            <div className='qHeader_icon'>
+            <RouterLink to="/login">
+              <div className='qHeader_icon'>
                 <Home />
-            </div>
+              </div>
+            </RouterLink>
+              
             <div className='qHeader_icon'>
               <BorderAllRounded />
             </div>
@@ -65,8 +86,29 @@ function Navbar() {
 
         <div className='qHeader_Rem'>
           <div className='qHeader_avatar'>
-              <Avatar src={user.phto} onClick={()=>{auth.signOut()}}/>
+              {/* <Avatar src={user.phto} onClick={()=>{auth.signOut()}}/> */}
+              <Avatar src={user.phto} onClick={()=>handleClickOpen()}/>
           </div>
+
+          {/* modal start */}
+          <div>
+            <Dialog
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogTitle id="alert-dialog-title">
+                {"로그아웃 하시겠습니까?"}
+              </DialogTitle>
+              <DialogActions>
+                <Button variant="outlined" onClick={()=>{auth.signOut()}}>YES</Button>
+                <Button variant="outlined" onClick={handleClose}>NO</Button>
+              </DialogActions>
+            </Dialog>
+          </div>
+          {/* modal end */}
+
           <Language/>
           <Button onClick={() => setOpenModal(true)}>질문하기</Button>
 

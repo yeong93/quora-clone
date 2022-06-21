@@ -1,5 +1,5 @@
 import { Avatar } from '@material-ui/core';
-import { ArrowDownwardOutlined, ArrowUpwardOutlined, ChatBubbleOutlined, ChatBubbleOutlineOutlined, MoreHorizOutlined, RepeatOneOutlined, ShareOutlined } from '@material-ui/icons';
+import { ArrowDownwardOutlined, ArrowUpwardOutlined, ChatBubbleOutlineOutlined, MoreHorizOutlined, RepeatOneOutlined, ShareOutlined } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react';
 import './Post.css';
 import Modal from 'react-modal';
@@ -25,20 +25,21 @@ function Post({key, Id, image, question, timestamp, quoraUser}) {
     const handleAnswer = (e) => {
         e.preventDefault();
 
-        if(questionId){
-            db.collection("questions").doc(questionId).collection("answer")
-            .add({
-                question: questionId,
+        if (questionId){
+            db.collection('questions').doc(questionId).collection('answer').add({
+                questionId: questionId,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                answer: answer,
-                user: user
-            })
+                    answer: answer,
+                    user: user,
+                })
+
 
             console.log(questionId, questionName)
-            setAnswer("");
-            setOpenModal(false);
+            setAnswer("")
+            setOpenModal(false)
         }
     }
+
 
     useEffect(() => {
         if (questionId) {

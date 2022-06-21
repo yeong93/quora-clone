@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import './Login.css'
 import {ArrowForwardIos} from "@material-ui/icons";
 import {auth, provider} from './firebase';
@@ -10,7 +10,6 @@ function Login() {
 
   const signIn = () => {
     auth.signInWithPopup(provider).catch((e) => alert(e.message));
-
     console.log(auth);    
   }
 

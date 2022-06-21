@@ -45,5 +45,6 @@
 .sidebarFirst{
     /* border-bottom: 1px solid lightgray; */
     border: 1px solid lightgray;
-    margin: 8px;
+    background-color: white;
+    margin: 0 8px 8px 8px;
 }
